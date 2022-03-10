@@ -1,8 +1,8 @@
 // Databricks notebook source
 //mounting the data to connect with s3 bucket using access and secret keys
 
-val access_key = "AKIA22UAFDPYYDZBIXBL"
-val secret_key = "hklNXmXCRwyqgN/5FjBvxYUzchUrZ3egN39VT4Zs"
+val access_key = "xxxxxxx"
+val secret_key = "xxxxxxxxx"
 val encoded_secret_key =  secret_key.replace("/", "%2F")
 val aws_bucket_name = "databrickprac"
 val mount_name = "mount_databricks_new"
