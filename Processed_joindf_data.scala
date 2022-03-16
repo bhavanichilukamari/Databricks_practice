@@ -22,7 +22,7 @@ val df = spark.read.format("csv")
 
 // COMMAND ----------
 
-df.show()
+display(df)
 
 // COMMAND ----------
 
@@ -38,11 +38,11 @@ val df1 = spark.read.format("csv")
 
 // COMMAND ----------
 
-df1.show()
+display(df1)
 
 // COMMAND ----------
 
-// actual transformation to get the unique users with product type of tvod and est
+// actual transformation to get the  users with product type of tvod and est
 
  val joined_df = df.join(df1,df("house_number") === df1("house_number") && 
         df("country_code") === df1("country_code"),"inner")
@@ -69,7 +69,16 @@ df1.show()
 
 // COMMAND ----------
 
-joined_df.show()
+display(joined_df)
+
+//replacing null values in season and season episode with 0
+
+val null_df = joined_df.withColumn("season",expr("coalesce(season,0)"))
+              .withColumn("season_episode",expr("coalesce(season_episode,0)"))
+
+//display the df after replacing
+
+display(null_df)
 
 // COMMAND ----------
 
