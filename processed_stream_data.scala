@@ -31,15 +31,13 @@ df.show()
 val transform_data = df
         .select(col("dt"),col("device_name"),col("product_type"),
         col("user_id"),col("program_title"), col("country_code"))
-        .groupBy(col("dt"), col("program_title"), col("device_name"),
-        col("country_code"), col("product_type"))
-        .agg(countDistinct(col("user_id")) as "unique_users", 
-        count(col("program_title")) as "content_count")
+        .groupBy(col("dt"),col("device_name"),col("product_type"),col("user_id") as "unique_users",col("program_title"),col("country_code"))
+        .agg(count(col("program_title")) as "content_count")
         .withColumn("load_date", current_date())
         .withColumn("year", year(col("load_date")))
         .withColumn("month", month(col("load_date")))
         .withColumn("day", dayofmonth(col("load_date")))
-        .sort(col("unique_users").desc) 
+        .sort(col("content_count").desc) 
 
 // COMMAND ----------
 
